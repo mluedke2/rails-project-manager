@@ -4,9 +4,11 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.0.0'
+gem 'eventmachine', '~> 1.0.7'
+gem 'json', '~> 1.8.3'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.3.11'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -62,7 +64,3 @@ gem 'thin'
 
 # use thin webserver
 # gem 'thin'
-
-
-
-
