@@ -2,8 +2,11 @@ ProjectManager::Application.routes.draw do
   resources :tasks
 
   devise_for :users
-  resources :projects
   root to: 'pages#home'
+
+  resources :projects do
+    resources :tasks
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -46,7 +49,7 @@ ProjectManager::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
