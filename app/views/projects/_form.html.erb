@@ -16,6 +16,25 @@
     <%= f.text_field :name %>
   </div>
 
+  <h2>Tasks:</h2>
+
+  <table class="table">
+    <tr>
+      <td>Task Name</td>
+      <td>Delete</td>
+    </tr>
+
+    <% @project.tasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td>
+          <%= form_for task, url: project_task_path(@project, task), method: :delete, remote: true do |f| %>
+            <%= f.submit "Delete" %>
+          <% end %>
+        </td>
+    <% end %>
+  </table>
+
   <div class="actions">
     <%= f.submit %>
   </div>

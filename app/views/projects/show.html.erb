@@ -5,22 +5,13 @@
   <%= @project.name %>
 </h1>
 
-<h2>Tasks:</h2>
-
-  <%= form_for Task.new, url: project_tasks_path(@project), html: { method: :post} do |f| %>
-    <%= f.text_field :name, placeholder: "name" %>
-    <%= f.text_field :description, placeholder: "description" %>
-    <%= f.number_field :status, placeholder: "status" %>
-    <%= f.submit "Add Task" %>
-  <% end %>
-
 <table class="table">
   <tr>
     <td>Task Name</td>
     <td>Delete</td>
   </tr>
 
-  <% @tasks.each do |task| %>
+  <% @project.tasks.each do |task| %>
     <tr>
       <td><%= task.name %></td>
       <td>
@@ -33,9 +24,3 @@
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
-
-<script>
-  $(".edit_task").on("ajax:success", function() {
-    $(this).closest('tr').hide();
-  });
-</script>
