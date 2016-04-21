@@ -1,4 +1,6 @@
 ProjectManager::Application.routes.draw do
+  resources :tasks
+
   devise_for :users
   resources :projects
   root to: 'pages#home'
