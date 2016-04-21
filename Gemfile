@@ -62,7 +62,7 @@ gem 'quiet_assets'
 
 gem 'thin'
 
-#gem 'nested_form'
+gem 'nested_form'
 
 # use thin webserver
 # gem 'thin'

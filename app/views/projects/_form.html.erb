@@ -1,4 +1,4 @@
-<%= form_for(@project) do |f| %>
+<%= nested_form_for(@project) do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -16,24 +16,23 @@
     <%= f.text_field :name %>
   </div>
 
-  <h2>Tasks:</h2>
-
-  <table class="table">
-    <tr>
-      <td>Task Name</td>
-      <td>Delete</td>
-    </tr>
-
-    <% @project.tasks.each do |task| %>
-      <tr>
-        <td><%= task.name %></td>
-        <td>
-          <%= form_for task, url: project_task_path(@project, task), method: :delete, remote: true do |f| %>
-            <%= f.submit "Delete" %>
-          <% end %>
-        </td>
-    <% end %>
-  </table>
+  <%= f.fields_for :tasks do |builder| %>
+    <div class="field">
+      <%= builder.label :name %><br>
+      <%= builder.text_field :name %>
+    </div>
+    <div class="field">
+      <%= builder.label :description %><br>
+      <%= builder.text_field :description %>
+    </div>
+    <div class="field">
+      <%= builder.label :status %><br>
+      <%= builder.text_field :status %>
+    </div>
+    <div class="actions">
+      <%= builder.submit %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= f.submit %>
