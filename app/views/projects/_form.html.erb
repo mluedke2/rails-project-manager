@@ -18,6 +18,8 @@
 
   <table id="tasks">
     <%= f.fields_for :tasks do |builder| %>
+
+    <h3>New Task</h3>
       <div class="field">
         <%= builder.label :name %><br>
         <%= builder.text_field :name %>
