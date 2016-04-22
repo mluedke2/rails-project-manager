@@ -26,5 +26,15 @@
   <% end %>
 </table>
 
+<script>
+$(function() {
+  $( "button" ).click(function( event ) {
+      console.log("hi");
+    });
+});
+</script>
+
+<button>Show tasks</button>
+
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
