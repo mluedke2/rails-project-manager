@@ -27,9 +27,22 @@
 </table>
 
 <script>
+
+function getData(url) {
+    return $.ajax({
+        url : url,
+        type: 'GET'
+    });
+}
+
+function handleData(data) {
+    $("table").toggle();
+}
+
 $(function() {
   $( "button" ).click(function( event ) {
-    $("table").toggle();
+    var url = '<%= project_tasks_url(@project) %>';
+    getData(url).done(handleData);
   });
 });
 </script>
