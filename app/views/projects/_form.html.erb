@@ -30,6 +30,7 @@
         <%= builder.label :status %><br>
         <%= builder.text_field :status %>
       </div>
+      <%= builder.link_to_remove "Remove this task" %>
     <% end %>
   </table>
   <p><%= f.link_to_add "Add a task", :tasks, :data => { :target => "#tasks" } %></p>
