@@ -16,23 +16,23 @@
     <%= f.text_field :name %>
   </div>
 
-  <%= f.fields_for :tasks do |builder| %>
-    <div class="field">
-      <%= builder.label :name %><br>
-      <%= builder.text_field :name %>
-    </div>
-    <div class="field">
-      <%= builder.label :description %><br>
-      <%= builder.text_field :description %>
-    </div>
-    <div class="field">
-      <%= builder.label :status %><br>
-      <%= builder.text_field :status %>
-    </div>
-    <div class="actions">
-      <%= builder.submit %>
-    </div>
-  <% end %>
+  <table id="tasks">
+    <%= f.fields_for :tasks do |builder| %>
+      <div class="field">
+        <%= builder.label :name %><br>
+        <%= builder.text_field :name %>
+      </div>
+      <div class="field">
+        <%= builder.label :description %><br>
+        <%= builder.text_field :description %>
+      </div>
+      <div class="field">
+        <%= builder.label :status %><br>
+        <%= builder.text_field :status %>
+      </div>
+    <% end %>
+  </table>
+  <p><%= f.link_to_add "Add a task", :tasks, :data => { :target => "#tasks" } %></p>
 
   <div class="actions">
     <%= f.submit %>
