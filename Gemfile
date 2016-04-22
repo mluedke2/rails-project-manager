@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # --- defaults in Rails 4
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.2'
 gem 'eventmachine', '~> 1.0.7'
 gem 'json', '~> 1.8.3'
 
@@ -52,7 +52,7 @@ end
 # ---- Added
 
 # user accounts
-gem 'devise'
+gem 'devise', '~> 3.5.3'
 # pagination
 gem 'kaminari'
 # twitter bootstrap layout

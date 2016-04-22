@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421200642) do
+ActiveRecord::Schema.define(version: 20160422181530) do
 
   create_table "project_users", force: true do |t|
     t.integer  "project_id"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20160421200642) do
     t.string   "name"
     t.text     "description"
     t.integer  "project_id"
-    t.string   "status"
+    t.integer  "status",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end

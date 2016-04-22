@@ -30,8 +30,7 @@
       </div>
       <div class="field">
         <%= builder.label :status %><br>
-        <%= builder.text_field :status %>
-      </div>
+        <%= builder.select(:status, Task.statuses.keys.map {|status| [status.titleize, status]}) %>
       <%= builder.link_to_remove "Remove this task" %>
     <% end %>
   </table>
