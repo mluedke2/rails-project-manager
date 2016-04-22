@@ -27,22 +27,15 @@
 </table>
 
 <script>
-
-function getData(url) {
-    return $.ajax({
-        url : url,
-        type: 'GET'
-    });
-}
-
 function handleData(data) {
-    $("table").toggle();
+  $("table").toggle();
 }
 
 $(function() {
   $( "button" ).click(function( event ) {
-    var url = '<%= project_tasks_url(@project) %>';
-    getData(url).done(handleData);
+    var url = '<%= project_tasks_url(@project, :format=>:json) %>';
+    console.log(url);
+    $.getJSON(url).done(handleData);
   });
 });
 </script>
