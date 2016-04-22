@@ -8,14 +8,18 @@
 <table class="table">
   <tr>
     <td>Task Name</td>
+    <td>Description</td>
+    <td>Status</td>
     <td>Delete</td>
   </tr>
 
   <% @project.tasks.each do |task| %>
     <tr>
       <td><%= task.name %></td>
+      <td><%= task.description %></td>
+      <td><%= task.status %></td>
       <td>
-        <%= form_for task, url: project_task_path(@project, task), method: :delete, remote: true do |f| %>
+        <%= form_for task, url: task_path(@project, task), method: :delete, remote: true do |f| %>
           <%= f.submit "Delete" %>
         <% end %>
       </td>
