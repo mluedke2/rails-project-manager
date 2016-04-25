@@ -15,7 +15,11 @@
         <td>
           <%= link_to 'Show', project, class: 'btn' %>
           <%= link_to 'Edit', edit_project_path(project), class: 'btn' %>
-          <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% if project.canBeDestroyed %>
+            <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% else %>
+            <button id="btn_cant_destroy" class="btn btn-danger">Destroy</button>
+          <% end %>
         </td>
       </tr>
     <% end %>
@@ -24,8 +28,14 @@
 
 <br>
 
+<script>
+$(function() {
+  $( "#btn_cant_destroy" ).click(function( event ) {
+    alert("can't destroy, has started or finished tasks");
+  });
+});
+</script>
+
 <%= paginate @projects %>
 
-
 <%= link_to 'New Project', new_project_path %>
-
