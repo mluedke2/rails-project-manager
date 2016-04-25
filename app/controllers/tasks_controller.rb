@@ -34,7 +34,7 @@ class TasksController < ApplicationController
     @task.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url }
-      format.json { render :json => "success" }
+      format.json { render :json => {message: :success} }
     end
   end
 

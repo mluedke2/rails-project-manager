@@ -41,12 +41,12 @@ function makeRow(task) {
   btn.addEventListener('click',function(){
     $.ajax({
       method:'DELETE',
-      url: task.url,
-      statusCode: {
-        200: function() {
-          myRow.fadeOut();
-        }
-      }
+      url: task.url
+    }).success(function() {
+      myRow.fadeOut();
+    }).error(function (e) {
+      alert("something broke");
+      console.log(e);
     });
   });
 
