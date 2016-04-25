@@ -8,6 +8,8 @@ class Project < ActiveRecord::Base
   def destroy
     if canBeDestroyed
       super
+    else
+      raise "can't destroy"
     end
   end
 
