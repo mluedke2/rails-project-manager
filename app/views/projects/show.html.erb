@@ -19,8 +19,13 @@ function handleData(data) {
   if ($("table tr").length == 1) {
     data.forEach(makeRow);
   }
-  $("button").html("Hide Tasks");
+  $("#btn_tasks").html("Hide Tasks");
   $("table").show();
+
+  $( "#btn_delete" ).on("click", function( event ) {
+    $(this).closest('tr').fadeOut();
+    // call delete method
+  });
 }
 
 function makeRow(task) {
@@ -33,16 +38,15 @@ function makeRow(task) {
       ).append($('<td>')
         .append(task.status)
       ).append($('<td>')
-        .append('button')
+        .append('<button id="btn_delete">Delete</button>')
       )
     );
-  console.log(task);
 }
 
 $(function() {
-  $( "button" ).click(function( event ) {
+  $( "#btn_tasks" ).click(function( event ) {
     if ($("table").is(":visible")) {
-      $("button").html("Show Tasks");
+      $("#btn_tasks").html("Show Tasks");
       $("table").hide();
     } else {
       var url = '<%= project_tasks_url(@project, :format=>:json) %>';
@@ -52,7 +56,7 @@ $(function() {
 });
 </script>
 
-<button>Show tasks</button>
+<button id="btn_tasks">Show tasks</button>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

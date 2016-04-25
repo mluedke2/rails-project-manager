@@ -1,7 +1,7 @@
 ProjectManager::Application.routes.draw do
   devise_for :users
   root to: 'pages#home'
-  resources :tasks, only: [ :show, :update, :edit, :delete ]
+  resources :tasks, only: [ :show, :update, :edit, :destroy ]
   resources :projects do
     resources :tasks, only: [ :index, :new, :create ]
   end
