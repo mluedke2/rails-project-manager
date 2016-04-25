@@ -5,37 +5,49 @@
   <%= @project.name %>
 </h1>
 
-<table class="table">
+<table hidden class="table">
   <tr>
     <td>Task Name</td>
     <td>Description</td>
     <td>Status</td>
     <td>Delete</td>
   </tr>
-
-  <% @project.tasks.each do |task| %>
-    <tr>
-      <td><%= task.name %></td>
-      <td><%= task.description %></td>
-      <td><%= task.status %></td>
-      <td>
-        <%= form_for task, url: task_path(@project, task), method: :delete, remote: true do |f| %>
-          <%= f.submit "Delete" %>
-        <% end %>
-      </td>
-  <% end %>
 </table>
 
 <script>
 function handleData(data) {
-  $("table").toggle();
+  if ($("table tr").length == 1) {
+    data.forEach(makeRow);
+  }
+  $("button").html("Hide Tasks");
+  $("table").show();
+}
+
+function makeRow(task) {
+  $("table").find('tbody')
+    .append($('<tr>')
+      .append($('<td>')
+        .append(task.name)
+      ).append($('<td>')
+        .append(task.description)
+      ).append($('<td>')
+        .append(task.status)
+      ).append($('<td>')
+        .append('button')
+      )
+    );
+  console.log(task);
 }
 
 $(function() {
   $( "button" ).click(function( event ) {
-    var url = '<%= project_tasks_url(@project, :format=>:json) %>';
-    console.log(url);
-    $.getJSON(url).done(handleData);
+    if ($("table").is(":visible")) {
+      $("button").html("Show Tasks");
+      $("table").hide();
+    } else {
+      var url = '<%= project_tasks_url(@project, :format=>:json) %>';
+      $.getJSON(url).done(handleData);
+    }
   });
 });
 </script>
