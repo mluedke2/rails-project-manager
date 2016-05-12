@@ -59,7 +59,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url }
+      format.html { redirect_to projects_url, notice: @project.errors.empty? ? "" : @project.errors[:base].first }
       format.json { head :no_content }
     end
   end
