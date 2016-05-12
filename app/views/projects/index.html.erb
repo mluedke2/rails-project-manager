@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <h1>Listing projects</h1>
 
 <table class="table">
@@ -15,11 +17,7 @@
         <td>
           <%= link_to 'Show', project, class: 'btn' %>
           <%= link_to 'Edit', edit_project_path(project), class: 'btn' %>
-          <% if project.canBeDestroyed %>
-            <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-          <% else %>
-            <button id="btn_cant_destroy" class="btn btn-danger">Destroy</button>
-          <% end %>
+          <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>
@@ -27,14 +25,6 @@
 </table>
 
 <br>
-
-<script>
-$(function() {
-  $( "#btn_cant_destroy" ).click(function( event ) {
-    alert("can't destroy, has started or finished tasks");
-  });
-});
-</script>
 
 <%= paginate @projects %>
 
