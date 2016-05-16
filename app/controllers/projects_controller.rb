@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, only: [:edit, :update, :destroy]
+  before_action :require_user_allow_admin, only: [:edit, :update]
+  before_action :require_user, only: [:destroy]
 
   # GET /projects
   # GET /projects.json
@@ -71,8 +72,14 @@ class ProjectsController < ApplicationController
       @project = Project.find(params[:id])
     end
 
+    def require_user_allow_admin
+      require_user unless current_user.is_admin?
+    end
+
     def require_user
-      redirect_to projects_url, notice: 'Unauthorized to do this.' unless @project.users.include?(current_user)
+      unless @project.users.include?(current_user)
+        redirect_to projects_url, notice: 'Unauthorized to do this.'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422181530) do
+ActiveRecord::Schema.define(version: 20160516210825) do
 
-  create_table "project_users", force: true do |t|
+  create_table "project_users", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "user_id"
     t.integer  "role",       default: 1
@@ -24,14 +24,14 @@ ActiveRecord::Schema.define(version: 20160422181530) do
   add_index "project_users", ["project_id"], name: "index_project_users_on_project_id"
   add_index "project_users", ["user_id"], name: "index_project_users_on_user_id"
 
-  create_table "projects", force: true do |t|
-    t.string   "name"
+  create_table "projects", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tasks", force: true do |t|
-    t.string   "name"
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name",        limit: 255
     t.text     "description"
     t.integer  "project_id"
     t.integer  "status",      limit: 255
@@ -39,21 +39,22 @@ ActiveRecord::Schema.define(version: 20160422181530) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
+    t.integer  "sign_in_count",                      default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "fname"
-    t.string   "lname"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "fname",                  limit: 255
+    t.string   "lname",                  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
