@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.users += [current_user]
 
     respond_to do |format|
       if @project.save
@@ -71,7 +72,7 @@ class ProjectsController < ApplicationController
     end
 
     def require_user
-      redirect_to('/') unless @project.users.include?(current_user)
+      redirect_to projects_url, notice: 'Unauthorized to do this.' unless @project.users.include?(current_user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
