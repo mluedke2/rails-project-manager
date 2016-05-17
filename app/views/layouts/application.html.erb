@@ -56,4 +56,16 @@
     </div> <!-- /container -->
 
   </body>
+
+  <script>
+  $(function() {
+    $(".navbar-inner").css("backgroundImage", "none");
+    var currentdate = new Date();
+    if (currentdate.getHours() < 12) {
+      $(".navbar-inner").css("backgroundColor", "blue");
+    } else {
+      $(".navbar-inner").css("backgroundColor", "red");
+    }
+  });
+  </script>
 </html>
