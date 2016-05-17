@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :require_user_allow_admin, only: [:edit, :update]
   before_action :require_user, only: [:destroy]
+  before_action :require_login
 
   # GET /projects
   # GET /projects.json
@@ -84,6 +85,10 @@ class ProjectsController < ApplicationController
       unless @project.users.include?(current_user)
         redirect_to projects_url, notice: 'Unauthorized to do this.'
       end
+    end
+
+    def require_login
+      redirect_to "/" if current_user.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
