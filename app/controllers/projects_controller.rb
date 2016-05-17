@@ -68,7 +68,17 @@ class ProjectsController < ApplicationController
   end
 
   def clear_old
-    # TODO
+    @projects = Project.all
+    @projects.each do |project|
+      next unless project.updated_at < (DateTime.now - 7.days)
+      catch :unfinished do
+        project.tasks.each do |task|
+          throw :unfinished unless task.finished?
+        end
+        puts "delete"
+      end
+    end
+    redirect_to projects_url
   end
 
   private
