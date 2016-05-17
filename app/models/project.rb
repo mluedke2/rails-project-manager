@@ -7,13 +7,15 @@ class Project < ActiveRecord::Base
 
   accepts_nested_attributes_for :tasks, :allow_destroy => true
 
-  def validate_no_started_or_finished_tasks
-    unless can_be_destroyed
-      # errors.add_to_base() is deprecated in Rails 3. Instead do...
-      self.errors.add(:base, "can't destroy")
+  def force_destroy
+    @@force = true
+    Project.destroy(self.id)
+    @@force = false
+  end
 
-      puts self.errors.inspect
-      # this will prevent the object from getting destroyed
+  def validate_no_started_or_finished_tasks
+    unless can_be_destroyed || @@force
+      self.errors.add(:base, "can't destroy")
       return false
     end
   end

@@ -75,7 +75,7 @@ class ProjectsController < ApplicationController
         project.tasks.each do |task|
           throw :unfinished unless task.finished?
         end
-        puts "delete"
+        project.force_destroy
       end
     end
     redirect_to projects_url
